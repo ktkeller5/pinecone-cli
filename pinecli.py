@@ -94,8 +94,8 @@ def _pinecone_init(apikey, environment, indexname=''):
     index = None
     if indexname:
         try:
-            #index = pinecone.Index(indexname)
-            index = pinecone.GRPCIndex(indexname)
+            index = pinecone.Index(indexname)
+            #index = pinecone.GRPCIndex(indexname)
         except:
             sys.exit("Unable to connect.  Caught exception:")
         else:
