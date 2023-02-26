@@ -412,14 +412,12 @@ def upsert_webpage(pinecone_index_name, apikey, namespace, openaiapikey, metadat
                      for x in meta_batch]
         res = get_openai_embedding(openaiapikey, meta_batch)
         embeds = [record['embedding'] for record in res['data']]
-        print(literal_eval(other_meta))
         new_meta_batch=[]
         #meta_batch = [{metadata_content_key: x}.update(literal_eval(other_meta)) for x in meta_batch]
         for x in meta_batch:
             d = {metadata_content_key: x}
             d.update(literal_eval(other_meta))
             new_meta_batch.append(d)
-        print(new_meta_batch)
         to_upsert = list(zip(ids_batch, embeds, new_meta_batch))
         rv = pinecone_index.upsert(vectors=to_upsert, namespace=namespace)
         if debug:
