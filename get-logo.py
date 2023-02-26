@@ -32,3 +32,4 @@ def get_url(url):
                 src = url+src
             #print(src)
             return(src)
+    return("")
